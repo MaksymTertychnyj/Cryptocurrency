@@ -22,40 +22,47 @@ namespace Cryptocurrency.Services.Implementation
 
         public async Task<Asset> GetAssetByIdAsync(string id)
         {
-            return (await RetrieveDataAsync<ResponseEntity<Asset>>("assets/" + id)).Data;
+            var result = await RetrieveDataAsync<ResponseEntity<Asset>>("assets/" + id);
+            return result != null ? result.Data : null!;
         }
 
         public async Task<IEnumerable<Asset>> GetAssetsAsync(int page)
         {
             var param = GetParamString(page);
-            return (await RetrieveDataAsync<ResponseEntities<Asset>>("assets" + param)).Data;
+            var result = await RetrieveDataAsync<ResponseEntities<Asset>>("assets" + param);
+            return result != null ? result.Data : null!;
         }
 
         public async Task<Exchange> GetExchangeByIdAsync(string exchangeId)
         {
-            return (await RetrieveDataAsync<ResponseEntity<Exchange>>("exchanges/" + exchangeId)).Data;
+            var result = await RetrieveDataAsync<ResponseEntity<Exchange>>("exchanges/" + exchangeId);
+            return result != null ? result.Data : null!;
         }
 
         public async Task<IEnumerable<Exchange>> GetExchangesAsync(int page)
         {
             var param = GetParamString(page);
-            return (await RetrieveDataAsync<ResponseEntities<Exchange>>("exchanges" + param)).Data;
+            var result = await RetrieveDataAsync<ResponseEntities<Exchange>>("exchanges" + param);
+            return result != null ? result.Data : null!;
         }
 
         public async Task<IEnumerable<Market>> GetMarketsAsync(string? assetId, int page)
         {
             var param = GetParamString(page);
-            return (await RetrieveDataAsync<ResponseEntities<Market>>("markets" + param + "&assetId=" + assetId)).Data;
+            var result = await RetrieveDataAsync<ResponseEntities<Market>>("markets" + param + "&assetId=" + assetId);
+            return result != null ? result.Data : null!;
         }
 
         public async Task<Rate> GetRateAsync(string id)
         {
-            return (await RetrieveDataAsync<ResponseEntity<Rate>>("rates/" + id)).Data;
+            var result = await RetrieveDataAsync<ResponseEntity<Rate>>("rates/" + id);
+            return result != null ? result.Data : null!;
         }
 
         public async Task<IEnumerable<Rate>> GetRatesAsync()
         {
-            return (await RetrieveDataAsync<ResponseEntities<Rate>>("rates/")).Data;   
+            var result = await RetrieveDataAsync<ResponseEntities<Rate>>("rates/");
+            return result != null ? result.Data : null!;
         }
 
         private async Task<TResult> RetrieveDataAsync<TResult>(string request)
@@ -63,6 +70,7 @@ namespace Cryptocurrency.Services.Implementation
             try
             {
                 var response = await _httpClient.GetAsync(_httpClient.BaseAddress + request);
+                response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<TResult>(content)!;
             }

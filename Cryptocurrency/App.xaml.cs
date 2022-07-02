@@ -18,7 +18,21 @@ namespace Cryptocurrency
     {
         public IServiceProvider ServiceProvider { get; private set; }
         public IConfiguration Configuration { get; private set; }
-       
+
+        public App()
+        {
+            Configuration = new ConfigurationBuilder()
+                .AddJsonFile(Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory, "appsettings.json"),
+                    optional: true,
+                    reloadOnChange: false
+                 ).Build();
+
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+            ServiceProvider = serviceCollection.BuildServiceProvider();
+        }
+
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient<IRetrieveDataService, RetrieveDataService>(client =>
@@ -32,17 +46,6 @@ namespace Cryptocurrency
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            Configuration = new ConfigurationBuilder()
-                .AddJsonFile(Path.Combine(
-                    AppDomain.CurrentDomain.BaseDirectory, "appsettings.json"), 
-                    optional: true, 
-                    reloadOnChange: false
-                 ).Build();
-
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-            ServiceProvider = serviceCollection.BuildServiceProvider();
-
             var mainWindow = ServiceProvider!.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
