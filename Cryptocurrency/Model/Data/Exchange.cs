@@ -2,7 +2,7 @@
 {
     public class Exchange
     {
-        public string? Id { get; set; }
+        public string? ExchangeId { get; set; }
         public string? Name { get; set; }
         public string? Rank { get; set; }
         public string? PercentTotalVolume { get; set; }
