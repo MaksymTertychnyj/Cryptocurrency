@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cryptocurrency.Model.Data
+﻿namespace Cryptocurrency.Model.Data
 {
     public class Exchange
     {
-        public string? Id { get; set; }
+        public string? ExchangeId { get; set; }
         public string? Name { get; set; }
         public string? Rank { get; set; }
         public string? PercentTotalVolume { get; set; }
