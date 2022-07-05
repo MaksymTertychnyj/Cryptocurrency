@@ -20,6 +20,7 @@ namespace Cryptocurrency.Pages
     /// </summary>
     public partial class Start : Page
     {
+        
         public Start()
         {
             InitializeComponent();
