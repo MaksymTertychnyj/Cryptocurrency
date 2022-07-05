@@ -10,11 +10,18 @@
         
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel>
-            <TextBlock >Menu</TextBlock>
+            <Button 
+                Command="{Binding ClickHome}" 
+                Content="Home" Width="40" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="10 0 0 0"
+                BorderBrush="Blue"
+                />
         </DockPanel>
         <Frame
             Grid.Row="1"
