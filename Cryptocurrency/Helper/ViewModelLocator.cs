@@ -1,6 +1,4 @@
-﻿using Cryptocurrency.Services.Implementation;
-using Cryptocurrency.Services.Interfaces;
-using Cryptocurrency.ViewModel;
+﻿using Cryptocurrency.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

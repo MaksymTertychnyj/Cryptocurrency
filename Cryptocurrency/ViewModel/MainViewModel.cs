@@ -2,6 +2,9 @@
 using Cryptocurrency.Services.Implementation;
 using Cryptocurrency.Pages;
 using Cryptocurrency.Services.Interfaces;
+using System.ComponentModel;
+using System.Windows.Input;
+using Cryptocurrency.Helper;
 
 namespace Cryptocurrency.ViewModel
 {
@@ -18,6 +21,18 @@ namespace Cryptocurrency.ViewModel
             _pageService = pageService;
             _pageService.OnPageChanged += (page) => StartViewModel.CurrentPage = page;
             _pageService.ChangePage(new Start());
+        }
+
+        public ICommand ClickHome
+        {
+            get
+            {
+                return new DelegateCommand((obj) =>
+                {
+                    _pageService.ChangePage(new Start());
+                    StartViewModel.OnPropertyChanged(nameof(StartViewModel.CurrentPage));
+                }, (obj) => StartViewModel.CurrentPage!.GetType() != typeof(Start));
+            }
         }
     }
 }

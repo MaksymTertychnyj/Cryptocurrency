@@ -41,8 +41,8 @@ namespace Cryptocurrency
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
-            services.AddTransient<MainViewModel>();
-            services.AddTransient<StartViewModel>();
+            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<StartViewModel>();
             services.AddSingleton<PageService>();
 
             services.AddSingleton(typeof(MainWindow));

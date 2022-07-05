@@ -16,12 +16,11 @@ using System.Windows.Shapes;
 namespace Cryptocurrency.Pages
 {
     /// <summary>
-    /// Interaction logic for Main.xaml
+    /// Interaction logic for AssetPage.xaml
     /// </summary>
-    public partial class Start : Page
+    public partial class AssetPage : Page
     {
-        
-        public Start()
+        public AssetPage()
         {
             InitializeComponent();
         }
