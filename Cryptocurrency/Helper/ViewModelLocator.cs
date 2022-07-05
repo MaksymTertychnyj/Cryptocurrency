@@ -8,13 +8,17 @@ namespace Cryptocurrency.Helper
     {
         private static IServiceProvider? _provider;
 
+        protected ViewModelLocator()
+        {
+        }
+
         public static void Init(IServiceProvider provider)
         {
             _provider = provider;
         }
 
-        public MainViewModel MainViewModel => _provider!.GetRequiredService<MainViewModel>();
-        public StartViewModel StartViewModel => _provider!.GetRequiredService<StartViewModel>();
+        public static MainViewModel MainViewModel => _provider!.GetRequiredService<MainViewModel>();
+        public static StartViewModel StartViewModel => _provider!.GetRequiredService<StartViewModel>();
 
     }
 }

@@ -31,7 +31,7 @@ namespace Cryptocurrency.ViewModel
                 {
                     _pageService.ChangePage(new Start());
                     StartViewModel.OnPropertyChanged(nameof(StartViewModel.CurrentPage));
-                }, (obj) => nameof(StartViewModel.CurrentPage) != nameof(Start));
+                }, (obj) => StartViewModel.CurrentPage!.GetType() != typeof(Start));
             }
         }
     }
