@@ -29,10 +29,10 @@ namespace Cryptocurrency.ViewModel
         public StartViewModel(IRetrieveDataService retrieveDataService)
         {
             _retrieveDataService = retrieveDataService;
-            RetrieveAssets();
+            Task.FromResult(RetrieveAssets());
         }
 
-        private async void RetrieveAssets()
+        private async Task RetrieveAssets()
         {
             var assets = await _retrieveDataService.GetAssetsAsync(1);
             assets.ToList().ForEach(asset => Assets.Add(asset));
