@@ -1,12 +1,12 @@
-﻿using Cryptocurrency.Services.Implementation;
+﻿using Cryptocurrency.Helper;
+using Cryptocurrency.Services.Implementation;
 using Cryptocurrency.Services.Interfaces;
+using Cryptocurrency.ViewModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Http.Headers;
-using System.Reflection;
 using System.Windows;
 
 namespace Cryptocurrency
@@ -41,11 +41,16 @@ namespace Cryptocurrency
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
+            services.AddTransient<MainViewModel>();
+            services.AddTransient<StartViewModel>();
+            services.AddSingleton<PageService>();
+
             services.AddSingleton(typeof(MainWindow));
         }
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            ViewModelLocator.Init(ServiceProvider);
             var mainWindow = ServiceProvider!.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }

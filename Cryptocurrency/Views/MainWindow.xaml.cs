@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Cryptocurrency.Services.Implementation;
+using Cryptocurrency.ViewModel;
+using System.Windows;
 
 namespace Cryptocurrency
 {
