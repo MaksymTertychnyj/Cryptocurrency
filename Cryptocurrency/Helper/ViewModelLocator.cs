@@ -10,6 +10,10 @@ namespace Cryptocurrency.Helper
     {
         private static IServiceProvider? _provider;
 
+        protected ViewModelLocator()
+        {
+        }
+
         public static void Init(IServiceProvider provider)
         {
             _provider = provider;
