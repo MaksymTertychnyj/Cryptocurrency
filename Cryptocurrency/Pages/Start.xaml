@@ -18,22 +18,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel>
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="10 0 0 0"
+                FontWeight="Bold"
+                >
+                Search
+            </TextBlock>
             <TextBox
                 Height="20"
                 Width="100"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Margin="10 0 0 0"
-                Text="{Binding SerachText}"
-                />
-            <Button
-                Command="{Binding Search}"
-                Content="Search"
-                Height="20"
-                Width="40"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Margin="10 0 0 0"
+                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                 />
         </DockPanel>
         <ListView 
