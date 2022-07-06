@@ -11,7 +11,7 @@ namespace Cryptocurrency.Services.Interfaces
     {
         Task<IEnumerable<Asset>> GetAssetsAsync(int page);
         Task<Asset> GetAssetByIdAsync(string id);
-        Task<IEnumerable<Market>> GetMarketsAsync(string? assetId, int page);
+        Task<IEnumerable<Market>> GetMarketsAsync(string? baseId, int page);
         Task<IEnumerable<Exchange>> GetExchangesAsync(int page);
         Task<Exchange> GetExchangeByIdAsync(string exchangeId);
         Task<IEnumerable<Rate>> GetRatesAsync();
