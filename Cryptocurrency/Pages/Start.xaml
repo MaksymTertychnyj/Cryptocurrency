@@ -13,13 +13,37 @@
     </Page.Resources>
     
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <TextBox
+                Height="20"
+                Width="100"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="10 0 0 0"
+                Text="{Binding SerachText}"
+                />
+            <Button
+                Command="{Binding Search}"
+                Content="Search"
+                Height="20"
+                Width="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="10 0 0 0"
+                />
+        </DockPanel>
         <ListView 
             HorizontalContentAlignment="Stretch" 
-            ItemsSource="{Binding Assets}"
-            SelectedItem="{Binding SelectedAsset}">
+            ItemsSource="{Binding AssetsView}"
+            SelectedItem="{Binding SelectedAsset}"
+            Grid.Row="1"
+            >
             <ListView.View>
                 <GridView>
-                   
                     <GridView.Columns>
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
