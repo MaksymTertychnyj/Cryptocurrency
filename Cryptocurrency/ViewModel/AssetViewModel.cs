@@ -22,6 +22,8 @@ namespace Cryptocurrency.ViewModel
         public ICollectionView RatesView { get; set; }
         public ObservableCollection<Rate> Rates { get; set; } = new ObservableCollection<Rate>();
         public double ConverterValue { get; set; }
+        public ObservableCollection<Market> Markets { get; set; } = new ObservableCollection<Market>();
+        public ICollectionView MarketsView { get; set; } 
 
         public AssetViewModel(IRetrieveDataService retrieveDataService, StartViewModel startViewModel)
         {
@@ -29,6 +31,19 @@ namespace Cryptocurrency.ViewModel
             Task.FromResult(RetrieveRates());
             CurrentAsset = startViewModel.SelectedAsset!;
             RatesView = CollectionViewSource.GetDefaultView(Rates);
+            Task.FromResult(RetrieveMarkets());
+            MarketsView = CollectionViewSource.GetDefaultView(Markets);
+        }
+
+        private Market? _selectedMarket;
+        public Market? SelectedMarket 
+        {
+            get { return _selectedMarket; }
+            set 
+            { 
+                _selectedMarket = value; 
+                OnPropertyChanged(nameof(SelectedMarket));
+            }
         }
 
         private Rate? _selectedRate;
@@ -118,6 +133,12 @@ namespace Cryptocurrency.ViewModel
         {
             var rates = await _retrieveDataService.GetRatesAsync();
             rates.ToList().ForEach(rate => Rates.Add(rate));
+        }
+
+        private async Task RetrieveMarkets()
+        {
+            var markets = await _retrieveDataService.GetMarketsAsync(CurrentAsset.Id, 1);
+            markets.ToList().ForEach(market => Markets.Add(market));
         }
 
         private void ConvertAsset(Converter toConvert)

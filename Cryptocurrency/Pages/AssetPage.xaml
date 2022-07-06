@@ -18,10 +18,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        
         <DockPanel
             Grid.Row="0"
             Grid.Column="0"
@@ -154,6 +157,83 @@
             </TextBlock>
         </DockPanel>
         
+            <ListView 
+            Grid.Row="2"
+            HorizontalContentAlignment="Stretch" 
+            ItemsSource="{Binding MarketsView}"
+            SelectedItem="{Binding SelectedMarket}"
+            Margin="0 30 0 0"
+            >
+                <ListView.View>
+                    <GridView>
+                    <GridView.Columns>
+                            <GridViewColumn Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                    <TextBlock Text="{Binding ExchangeId}"/>
+                                </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                <GridViewColumn.Header>
+                                <TextBlock Text="Exchange"/>
+                            </GridViewColumn.Header>
+                            </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding QuoteId}"/>
+                                        <Run Text="/("/>
+                                        <Run Text="{Binding QuoteSymbol}"/>
+                                        <Run Text=")"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Quote"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PriceUsd, Converter={StaticResource PriceConverter}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Price"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding VolumeUsd24Hr, Converter={StaticResource PriceConverter}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Volume, (24Hr)"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TradesCount24Hr}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Trades, (24Hr)"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+
+                    </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+                 </ListView.ItemContainerStyle>
+            </ListView>
         
     </Grid>
 </Page>
