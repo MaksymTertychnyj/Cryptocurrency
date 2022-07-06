@@ -21,6 +21,7 @@
                 VerticalAlignment="Center"
                 Margin="10 0 0 0"
                 BorderBrush="Blue"
+                Grid.Row="0"
                 />
         </DockPanel>
         <Frame

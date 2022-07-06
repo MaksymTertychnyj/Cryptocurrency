@@ -8,7 +8,7 @@ namespace Cryptocurrency.Helper
     {
         private static IServiceProvider? _provider;
 
-        protected ViewModelLocator()
+        public ViewModelLocator()
         {
         }
 
