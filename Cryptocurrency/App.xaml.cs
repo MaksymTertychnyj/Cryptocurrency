@@ -43,6 +43,7 @@ namespace Cryptocurrency
 
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<StartViewModel>();
+            services.AddTransient<AssetViewModel>();
             services.AddSingleton<PageService>();
 
             services.AddSingleton(typeof(MainWindow));

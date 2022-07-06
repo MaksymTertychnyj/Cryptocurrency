@@ -19,6 +19,6 @@ namespace Cryptocurrency.Helper
 
         public static MainViewModel MainViewModel => _provider!.GetRequiredService<MainViewModel>();
         public static StartViewModel StartViewModel => _provider!.GetRequiredService<StartViewModel>();
-
+        public static AssetViewModel AssetViewModel => _provider!.GetRequiredService<AssetViewModel>();
     }
 }
