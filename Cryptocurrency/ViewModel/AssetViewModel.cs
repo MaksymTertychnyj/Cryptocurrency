@@ -1,6 +1,7 @@
 ﻿using Cryptocurrency.Helper;
 using Cryptocurrency.Model.Data;
 using Cryptocurrency.Model.Enums;
+using Cryptocurrency.Pages;
 using Cryptocurrency.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -23,7 +25,7 @@ namespace Cryptocurrency.ViewModel
         public ObservableCollection<Rate> Rates { get; set; } = new ObservableCollection<Rate>();
         public double ConverterValue { get; set; }
         public ObservableCollection<Market> Markets { get; set; } = new ObservableCollection<Market>();
-        public ICollectionView MarketsView { get; set; } 
+        public ICollectionView MarketsView { get; set; }
 
         public AssetViewModel(IRetrieveDataService retrieveDataService, StartViewModel startViewModel)
         {
@@ -36,13 +38,17 @@ namespace Cryptocurrency.ViewModel
         }
 
         private Market? _selectedMarket;
-        public Market? SelectedMarket 
+        public Market? SelectedMarket
         {
             get { return _selectedMarket; }
-            set 
-            { 
-                _selectedMarket = value; 
-                OnPropertyChanged(nameof(SelectedMarket));
+            set
+            {
+                _selectedMarket = value;
+                if (value != null)
+                {
+                    Task.FromResult(RetrieveExchange(value.ExchangeId!));
+                    OnPropertyChanged(nameof(SelectedMarket));
+                }
             }
         }
 
@@ -83,13 +89,35 @@ namespace Cryptocurrency.ViewModel
             }
         }
 
+        private Exchange? _currentExchange;
+        public Exchange? CurrentExchange
+        {
+            get { return _currentExchange; }
+            set
+            {
+                _currentExchange = value;
+                OnPropertyChanged(nameof(CurrentExchange));
+            }
+        }
+
         public ICommand toHomePage
         {
             get
             {
                 return new DelegateCommand((obj) =>
                 {
-                    OpenDefaultBrowser();
+                    OpenDefaultBrowser(CurrentAsset.Explorer!);
+                });
+            }
+        }
+
+        public ICommand toExchangePage
+        {
+            get
+            {
+                return new DelegateCommand((obj) =>
+                {
+                    OpenDefaultBrowser(CurrentExchange!.ExchangeUrl!);
                 });
             }
         }
@@ -121,11 +149,11 @@ namespace Cryptocurrency.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
-        private void OpenDefaultBrowser()
+        private void OpenDefaultBrowser(string url)
         {
             var psi = new ProcessStartInfo();
             psi.UseShellExecute = true;
-            psi.FileName = CurrentAsset.Explorer;
+            psi.FileName = url;
             Process.Start(psi);
         }
 
@@ -137,8 +165,16 @@ namespace Cryptocurrency.ViewModel
 
         private async Task RetrieveMarkets()
         {
-            var markets = await _retrieveDataService.GetMarketsAsync(CurrentAsset.Id, 1);
-            markets.ToList().ForEach(market => Markets.Add(market));
+            if (CurrentAsset != null)
+            {
+                var markets = await _retrieveDataService.GetMarketsAsync(CurrentAsset.Id, 1);
+                markets.ToList().ForEach(market => Markets.Add(market));
+            }
+        }
+
+        private async Task RetrieveExchange(string id)
+        {
+            CurrentExchange = await _retrieveDataService.GetExchangeByIdAsync(id);
         }
 
         private void ConvertAsset(Converter toConvert)

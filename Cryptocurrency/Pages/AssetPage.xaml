@@ -21,13 +21,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
+        <Border Grid.Row="2" Grid.Column="1"></Border>
         
         <DockPanel
             Grid.Row="0"
-            Grid.Column="0"
+            Grid.ColumnSpan="2"
             Margin="20 20 0 0"                
             >
             <TextBlock
@@ -75,6 +76,7 @@
         </DockPanel>
         <DockPanel
             Grid.Row="1"
+            Grid.ColumnSpan="2"
             Margin="0 20 0 0"
             >
             <TextBlock
@@ -234,6 +236,66 @@
                 </Style>
                  </ListView.ItemContainerStyle>
             </ListView>
-        
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0 30 0 0"
+            >
+            
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="15"
+                FontWeight="Bold"
+                Text="{Binding CurrentExchange.Name}"/>
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                FontSize="10" 
+                Margin="20 20 0 0"
+                Text="Volume, USD:"
+                />
+            <TextBlock
+                FontSize="15" 
+                Margin="20 5 0 0"
+                >
+                <Run Text="$"/>
+                <Run Text="{Binding CurrentExchange.VolumeUsd, Converter={StaticResource PriceConverter}}"/>
+            </TextBlock>
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                FontSize="10" 
+                Margin="20 20 0 0"
+                Text="Total volume, %:"
+                />
+            <TextBlock
+                FontSize="15" 
+                Margin="20 5 0 0"
+                >
+                <Run Text="{Binding CurrentExchange.PercentTotalVolume, Converter={StaticResource PriceConverter}}"/>
+            </TextBlock>
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                FontSize="10" 
+                Margin="20 20 0 0"
+                Text="Trading pairs:"
+                />
+            <TextBlock
+                FontSize="15" 
+                Margin="20 5 0 0"
+                >
+                <Run Text="{Binding CurrentExchange.TradingPairs}"/>
+            </TextBlock>
+            <TextBlock
+                HorizontalAlignment="Left"
+                Margin="20 15 0 0"
+                >
+                <Hyperlink Command="{Binding toExchangePage}">
+                    <Run Text="{Binding CurrentExchange.ExchangeUrl}"/>
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+            
     </Grid>
 </Page>
