@@ -63,7 +63,7 @@ namespace Cryptocurrency.ViewModel
             }
         }
 
-        private string _selectedValueConverter = "1";
+        private string _selectedValueConverter = "";
         public string SelectedValueConverter 
         {
             get { return _selectedValueConverter; }
@@ -129,7 +129,7 @@ namespace Cryptocurrency.ViewModel
                 return new DelegateCommand((obj) =>
                 {
                     ConvertAsset(Converter.toCurrency);
-                });
+                }, (obj) => !string.IsNullOrEmpty(SelectedValueConverter));
             }
         }
 
@@ -140,7 +140,7 @@ namespace Cryptocurrency.ViewModel
                 return new DelegateCommand((obj) =>
                 {
                     ConvertAsset(Converter.toCryptoCurrency);
-                });
+                }, (obj) => !string.IsNullOrEmpty(SelectedValueConverter));
             }
         }
 
