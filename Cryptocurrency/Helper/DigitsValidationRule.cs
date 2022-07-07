@@ -15,17 +15,14 @@ namespace Cryptocurrency.Helper
         {
             var validationResult = new ValidationResult(true, null);
 
-            if (value != null)
+            if (value != null && !string.IsNullOrEmpty(value.ToString()))
             {
-                if (!string.IsNullOrEmpty(value.ToString()))
-                {
                     var regex = new Regex("[^0-9.-]+,"); 
                     var parsingOk = !regex.IsMatch(value.ToString()!);
                     if (!parsingOk)
                     {
                         validationResult = new ValidationResult(false, "Please Enter Numeric Value");
                     }
-                }
             }
 
             return validationResult;
