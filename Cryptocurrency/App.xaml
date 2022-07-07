@@ -5,5 +5,12 @@
              Startup="OnStartup">
     <Application.Resources>
         <local:ViewModelLocator x:Key="ViewModelLocator"/>
+
+        <ResourceDictionary x:Key="ResourcesDictionary">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/LightTheme.xaml"/>
+                <ResourceDictionary Source="Style/DarkTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

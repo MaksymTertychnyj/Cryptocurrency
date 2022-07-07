@@ -1,4 +1,5 @@
-﻿using Cryptocurrency.ViewModel;
+﻿using Cryptocurrency.Services.Implementation;
+using Cryptocurrency.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -20,5 +21,6 @@ namespace Cryptocurrency.Helper
         public static MainViewModel MainViewModel => _provider!.GetRequiredService<MainViewModel>();
         public static StartViewModel StartViewModel => _provider!.GetRequiredService<StartViewModel>();
         public static AssetViewModel AssetViewModel => _provider!.GetRequiredService<AssetViewModel>();
+        public static ThemeProviderService ThemeProviderService => _provider!.GetRequiredService<ThemeProviderService>();
     }
 }
