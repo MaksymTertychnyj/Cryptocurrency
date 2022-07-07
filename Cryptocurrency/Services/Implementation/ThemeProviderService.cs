@@ -11,7 +11,7 @@ namespace Cryptocurrency.Services.Implementation
 {
     public class ThemeProviderService
     {
-        public ResourceDictionary _resources { get; set; }
+        public ResourceDictionary _resources { get; set; } = new ResourceDictionary();
         public Theme CurrentTheme { get; set; }
 
         public void ChangeTheme(Theme theme, ResourceDictionary resources)
