@@ -1,4 +1,5 @@
 ﻿using Cryptocurrency.Helper;
+using Cryptocurrency.Model.Enums;
 using Cryptocurrency.Services.Implementation;
 using Cryptocurrency.Services.Interfaces;
 using Cryptocurrency.ViewModel;
@@ -45,12 +46,14 @@ namespace Cryptocurrency
             services.AddSingleton<StartViewModel>();
             services.AddTransient<AssetViewModel>();
             services.AddSingleton<PageService>();
+            services.AddSingleton<ThemeProviderService>();
 
             services.AddSingleton(typeof(MainWindow));
         }
-
+        
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            ServiceProvider!.GetRequiredService<ThemeProviderService>().ChangeTheme(Theme.Light, Resources);
             ViewModelLocator.Init(ServiceProvider);
             var mainWindow = ServiceProvider!.GetRequiredService<MainWindow>();
             mainWindow.Show();

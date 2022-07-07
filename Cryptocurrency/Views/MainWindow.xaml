@@ -23,6 +23,13 @@
                 BorderBrush="Blue"
                 Grid.Row="0"
                 />
+            <Button
+                Command="{Binding ChangeTheme}"
+                Content="Theme"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0 0 20 0"
+                />
         </DockPanel>
         <Frame
             Grid.Row="1"
