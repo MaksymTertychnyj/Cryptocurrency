@@ -37,9 +37,12 @@ namespace Cryptocurrency.ViewModel
             get { return _selectedAsset; }
             set 
             { 
+                if (value != null)
+                {
                 _selectedAsset = value;
                 CurrentPage = new AssetPage();
                 OnPropertyChanged(nameof(CurrentPage));
+                }
             }
         }
 
