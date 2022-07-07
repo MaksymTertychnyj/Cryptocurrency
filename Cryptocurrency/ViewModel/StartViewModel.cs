@@ -37,14 +37,17 @@ namespace Cryptocurrency.ViewModel
             get { return _selectedAsset; }
             set 
             { 
+                if (value != null)
+                {
                 _selectedAsset = value;
                 CurrentPage = new AssetPage();
                 OnPropertyChanged(nameof(CurrentPage));
+                }
             }
         }
 
         private string _searchText;
-        public string SerachText 
+        public string SearchText 
         {
             get { return _searchText; }
             set
@@ -54,7 +57,7 @@ namespace Cryptocurrency.ViewModel
                 {
                     if (obj is Asset asset)
                     {
-                        return asset.Name?.ToLower().Contains(SerachText.ToLower()) == true;
+                        return asset.Name?.ToLower().Contains(SearchText.ToLower()) == true;
                     }
 
                     return false;

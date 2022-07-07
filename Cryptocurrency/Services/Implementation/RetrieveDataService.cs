@@ -46,10 +46,10 @@ namespace Cryptocurrency.Services.Implementation
             return result != null ? result.Data : null!;
         }
 
-        public async Task<IEnumerable<Market>> GetMarketsAsync(string? assetId, int page)
+        public async Task<IEnumerable<Market>> GetMarketsAsync(string? baseId, int page)
         {
             var param = GetParamString(page);
-            var result = await RetrieveDataAsync<ResponseEntities<Market>>("markets" + param + "&assetId=" + assetId);
+            var result = await RetrieveDataAsync<ResponseEntities<Market>>("markets" + param + "&baseId=" + baseId);
             return result != null ? result.Data : null!;
         }
 

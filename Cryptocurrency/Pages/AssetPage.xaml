@@ -3,12 +3,299 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Cryptocurrency.Pages"
+      xmlns:converter="clr-namespace:Cryptocurrency.Helper.Converter" 
+      xmlns:rule="clr-namespace:Cryptocurrency.Helper"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AssetPage">
-
+      Title="AssetPage"
+      DataContext="{Binding AssetViewModel, Source={StaticResource ViewModelLocator}}"
+      >
+    <Page.Resources>
+        <converter:PriceConverter x:Key="PriceConverter"/>
+        <rule:DigitsValidationRule x:Key="DigitsValidationRule"/>
+    </Page.Resources>
     <Grid>
-        <TextBlock>AssetPage</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.4*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="2" Grid.Column="1"></Border>
+        
+        <DockPanel
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Margin="20 20 0 0"                
+            >
+            <TextBlock
+                Text="{Binding CurrentAsset.Name}"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="Bold"
+            />
+            <TextBlock
+                Text="{Binding CurrentAsset.Symbol}"
+                FontSize="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="15 0 0 0"
+                />
+            <TextBlock
+                FontSize="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="15 0 0 0"
+                >
+                <Run Text="Rank #"/>
+                <Run Text="{Binding CurrentAsset.Rank}"/>
+
+            </TextBlock>
+            <TextBlock
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Margin="30 0 0 0"
+                >
+                <Hyperlink Command="{Binding toHomePage}">
+                    Home page
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="30 0 0 0"
+                FontSize="17"
+                FontWeight="Bold"
+                >
+                <Run Text="$"/>
+                <Run Text="{Binding CurrentAsset.PriceUsd, Converter={StaticResource PriceConverter}}"/>
+            </TextBlock>
+        </DockPanel>
+        <DockPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="0 20 0 0"
+            >
+            <TextBlock
+                FontSize="15"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="20 0 0 0"
+                >
+                <Run Text="Converter"/>
+            </TextBlock>
+            <ComboBox
+                Width="80"
+                Height="20"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="30 0 0 0"
+                VerticalContentAlignment="Center"
+                ItemsSource="{Binding RatesView}"
+                SelectedItem="{Binding SelectedRate, UpdateSourceTrigger= PropertyChanged}"
+                SelectedIndex="0"
+                IsTextSearchEnabled="True"
+                IsEditable="True"
+                TextSearch.TextPath="Symbol"
+                >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Symbol}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox
+                Width="60"
+                Height="20"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
+                TextAlignment="Center"
+                Margin="20 0 0 0"
+                >
+                <TextBox.Text>
+                    <Binding Path="SelectedValueConverter" NotifyOnValidationError="True" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <rule:DigitsValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Button
+                Width="60"
+                Height="20"
+                Margin="30 0 0 0"
+                HorizontalAlignment="Left"
+                Command="{Binding ConvertToCryptocurrency}"
+                >
+                <TextBlock>
+                    <Run Text="to"/>
+                    <Run Text="{Binding CurrentAsset.Symbol}"/>
+                </TextBlock>
+            </Button>
+            <Button
+                Width="60"
+                Height="20"
+                Margin="30 0 0 0"
+                HorizontalAlignment="Left"
+                Command="{Binding ConvertToCurrency}"
+                >
+                <TextBlock>
+                    <Run Text="to"/>
+                    <Run Text="{Binding SelectedRate.Symbol}"/>
+                </TextBlock>
+            </Button>
+            <TextBlock
+                FontSize="15"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="50 0 0 0"
+                >
+                <Run FontWeight="Bold" Text="{Binding ConvertResult, Converter={StaticResource PriceConverter}}"/>
+                <Run Text="{Binding SelectedRate.CurrencySymbol}"/>
+            </TextBlock>
+        </DockPanel>
+        
+            <ListView 
+            Grid.Row="2"
+            HorizontalContentAlignment="Stretch" 
+            ItemsSource="{Binding MarketsView}"
+            SelectedItem="{Binding SelectedMarket}"
+            Margin="0 30 0 0"
+            >
+                <ListView.View>
+                    <GridView>
+                    <GridView.Columns>
+                            <GridViewColumn Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                    <TextBlock Text="{Binding ExchangeId}"/>
+                                </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                <GridViewColumn.Header>
+                                <TextBlock Text="Exchange"/>
+                            </GridViewColumn.Header>
+                            </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding QuoteId}"/>
+                                        <Run Text="/("/>
+                                        <Run Text="{Binding QuoteSymbol}"/>
+                                        <Run Text=")"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Quote"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PriceUsd, Converter={StaticResource PriceConverter}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Price"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding VolumeUsd24Hr, Converter={StaticResource PriceConverter}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Volume, (24Hr)"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TradesCount24Hr}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                            <GridViewColumn.Header>
+                                <TextBlock Text="Trades, (24Hr)"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+
+                    </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+                 </ListView.ItemContainerStyle>
+            </ListView>
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0 30 0 0"
+            >
+            
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="15"
+                FontWeight="Bold"
+                Text="{Binding CurrentExchange.Name}"/>
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                FontSize="10" 
+                Margin="20 20 0 0"
+                Text="Volume, USD:"
+                />
+            <TextBlock
+                FontSize="15" 
+                Margin="20 5 0 0"
+                >
+                <Run Text="$"/>
+                <Run Text="{Binding CurrentExchange.VolumeUsd, Converter={StaticResource PriceConverter}}"/>
+            </TextBlock>
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                FontSize="10" 
+                Margin="20 20 0 0"
+                Text="Total volume, %:"
+                />
+            <TextBlock
+                FontSize="15" 
+                Margin="20 5 0 0"
+                >
+                <Run Text="{Binding CurrentExchange.PercentTotalVolume, Converter={StaticResource PriceConverter}}"/>
+            </TextBlock>
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                FontSize="10" 
+                Margin="20 20 0 0"
+                Text="Trading pairs:"
+                />
+            <TextBlock
+                FontSize="15" 
+                Margin="20 5 0 0"
+                >
+                <Run Text="{Binding CurrentExchange.TradingPairs}"/>
+            </TextBlock>
+            <TextBlock
+                HorizontalAlignment="Left"
+                Margin="20 15 0 0"
+                >
+                <Hyperlink Command="{Binding toExchangePage}">
+                    <Run Text="{Binding CurrentExchange.ExchangeUrl}"/>
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+            
     </Grid>
 </Page>
