@@ -11,8 +11,8 @@
     <Page.Resources>
         <converter:PriceConverter x:Key="PriceConverter"/>
     </Page.Resources>
-    
-    <Grid>
+
+    <Grid Style="{DynamicResource grid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
@@ -22,6 +22,7 @@
                 VerticalAlignment="Center"
                 Margin="10 0 0 0"
                 FontWeight="Bold"
+                Style="{DynamicResource textblock}"
                 >
                 Search
             </TextBlock>
@@ -32,6 +33,7 @@
                 VerticalAlignment="Center"
                 Margin="10 0 0 0"
                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                Style="{DynamicResource textbox}"
                 />
         </DockPanel>
         <ListView 
@@ -39,9 +41,11 @@
             ItemsSource="{Binding AssetsView}"
             SelectedItem="{Binding SelectedAsset}"
             Grid.Row="1"
+            Style="{DynamicResource listview}"
+            ItemContainerStyle="{DynamicResource listviewitem}"
             >
             <ListView.View>
-                <GridView>
+                <GridView ColumnHeaderContainerStyle="{DynamicResource columnheader}">
                     <GridView.Columns>
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
@@ -116,13 +120,6 @@
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Height" Value="50"/>
-                    <Setter Property="FontSize" Value="12"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                </Style>
-            </ListView.ItemContainerStyle>
         </ListView>
     </Grid>
 </Page>

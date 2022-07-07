@@ -8,28 +8,38 @@
         DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
         >
         
-    <Grid>
+    <Grid Style="{DynamicResource grid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel>
-            <Button 
-                Command="{Binding ClickHome}" 
-                Content="Home" Width="40" 
+            <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Margin="10 0 0 0"
-                BorderBrush="Blue"
                 Grid.Row="0"
-                />
-            <Button
-                Command="{Binding ChangeTheme}"
-                Content="Theme"
-                HorizontalAlignment="Right"
+                >
+                <Hyperlink
+                    Command="{Binding ClickHome}"
+                    Style="{DynamicResource hyperlink}"
+                    >
+                    Home
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Margin="0 0 20 0"
-                />
+                Margin="20 0 0 0"
+                Grid.Row="0"
+                >
+                <Hyperlink
+                    Command="{Binding ChangeTheme}"
+                    Style="{DynamicResource hyperlink}"
+                    >
+                    Theme
+                </Hyperlink>
+            </TextBlock>
         </DockPanel>
         <Frame
             Grid.Row="1"

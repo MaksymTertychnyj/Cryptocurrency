@@ -14,7 +14,7 @@
         <converter:PriceConverter x:Key="PriceConverter"/>
         <rule:DigitsValidationRule x:Key="DigitsValidationRule"/>
     </Page.Resources>
-    <Grid>
+    <Grid Style="{DynamicResource grid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -36,6 +36,7 @@
                 VerticalAlignment="Center"
                 FontSize="20"
                 FontWeight="Bold"
+                Style="{DynamicResource textblock}"
             />
             <TextBlock
                 Text="{Binding CurrentAsset.Symbol}"
@@ -43,12 +44,14 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Margin="15 0 0 0"
+                Style="{DynamicResource textblock}"
                 />
             <TextBlock
                 FontSize="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Margin="15 0 0 0"
+                Style="{DynamicResource textblock}"
                 >
                 <Run Text="Rank #"/>
                 <Run Text="{Binding CurrentAsset.Rank}"/>
@@ -59,7 +62,12 @@
                 HorizontalAlignment="Center"
                 Margin="30 0 0 0"
                 >
-                <Hyperlink Command="{Binding toHomePage}">
+                <Hyperlink 
+                    Command="{Binding toHomePage}" 
+                    Foreground="#1E90FF" 
+                    FontWeight="Normal"
+                    TextDecorations="Underline"
+                    Style="{DynamicResource hyperlink}">
                     Home page
                 </Hyperlink>
             </TextBlock>
@@ -69,6 +77,7 @@
                 Margin="30 0 0 0"
                 FontSize="17"
                 FontWeight="Bold"
+                Style="{DynamicResource textblock}"
                 >
                 <Run Text="$"/>
                 <Run Text="{Binding CurrentAsset.PriceUsd, Converter={StaticResource PriceConverter}}"/>
@@ -84,6 +93,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Margin="20 0 0 0"
+                Style="{DynamicResource textblock}"
                 >
                 <Run Text="Converter"/>
             </TextBlock>
@@ -100,6 +110,8 @@
                 IsTextSearchEnabled="True"
                 IsEditable="True"
                 TextSearch.TextPath="Symbol"
+                Style="{DynamicResource combobox}"
+                ItemContainerStyle="{DynamicResource comboboxitem}"
                 >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -115,6 +127,7 @@
                 VerticalContentAlignment="Center"
                 TextAlignment="Center"
                 Margin="20 0 0 0"
+                Style="{DynamicResource textbox}"
                 >
                 <TextBox.Text>
                     <Binding Path="SelectedValueConverter" NotifyOnValidationError="True" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -130,8 +143,10 @@
                 Margin="30 0 0 0"
                 HorizontalAlignment="Left"
                 Command="{Binding ConvertToCryptocurrency}"
+                Style="{DynamicResource button}"
                 >
-                <TextBlock>
+                <TextBlock
+                    Style="{DynamicResource textblock}">
                     <Run Text="to"/>
                     <Run Text="{Binding CurrentAsset.Symbol}"/>
                 </TextBlock>
@@ -142,8 +157,11 @@
                 Margin="30 0 0 0"
                 HorizontalAlignment="Left"
                 Command="{Binding ConvertToCurrency}"
+                Style="{DynamicResource button}"
                 >
-                <TextBlock>
+                <TextBlock
+                    Style="{DynamicResource textblock}"
+                    >
                     <Run Text="to"/>
                     <Run Text="{Binding SelectedRate.Symbol}"/>
                 </TextBlock>
@@ -153,6 +171,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Margin="50 0 0 0"
+                Style="{DynamicResource textblock}"
                 >
                 <Run FontWeight="Bold" Text="{Binding ConvertResult, Converter={StaticResource PriceConverter}}"/>
                 <Run Text="{Binding SelectedRate.CurrencySymbol}"/>
@@ -165,9 +184,11 @@
             ItemsSource="{Binding MarketsView}"
             SelectedItem="{Binding SelectedMarket}"
             Margin="0 30 0 0"
+            Style="{DynamicResource listview}"                
+            ItemContainerStyle="{DynamicResource listviewitem}"
             >
                 <ListView.View>
-                    <GridView>
+                <GridView ColumnHeaderContainerStyle="{DynamicResource columnheader}">
                     <GridView.Columns>
                             <GridViewColumn Width="100">
                                 <GridViewColumn.CellTemplate>
@@ -228,35 +249,32 @@
                     </GridView.Columns>
                     </GridView>
                 </ListView.View>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Height" Value="30"/>
-                        <Setter Property="FontSize" Value="12"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                </Style>
-                 </ListView.ItemContainerStyle>
             </ListView>
         <StackPanel
             Grid.Row="2"
             Grid.Column="1"
             Margin="0 30 0 0"
             >
-            
+
             <TextBlock
                 HorizontalAlignment="Center"
                 FontSize="15"
                 FontWeight="Bold"
-                Text="{Binding CurrentExchange.Name}"/>
+                Text="{Binding CurrentExchange.Name}"
+                Style="{DynamicResource textblock}"
+                />
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Stretch"
                 FontSize="10" 
                 Margin="20 20 0 0"
                 Text="Volume, USD:"
+                Style="{DynamicResource textblock}"
                 />
             <TextBlock
                 FontSize="15" 
                 Margin="20 5 0 0"
+                Style="{DynamicResource textblock}"
                 >
                 <Run Text="$"/>
                 <Run Text="{Binding CurrentExchange.VolumeUsd, Converter={StaticResource PriceConverter}}"/>
@@ -267,10 +285,12 @@
                 FontSize="10" 
                 Margin="20 20 0 0"
                 Text="Total volume, %:"
+                Style="{DynamicResource textblock}"
                 />
             <TextBlock
                 FontSize="15" 
                 Margin="20 5 0 0"
+                Style="{DynamicResource textblock}"
                 >
                 <Run Text="{Binding CurrentExchange.PercentTotalVolume, Converter={StaticResource PriceConverter}}"/>
             </TextBlock>
@@ -280,10 +300,12 @@
                 FontSize="10" 
                 Margin="20 20 0 0"
                 Text="Trading pairs:"
+                Style="{DynamicResource textblock}"
                 />
             <TextBlock
                 FontSize="15" 
                 Margin="20 5 0 0"
+                Style="{DynamicResource textblock}"
                 >
                 <Run Text="{Binding CurrentExchange.TradingPairs}"/>
             </TextBlock>
@@ -291,7 +313,12 @@
                 HorizontalAlignment="Left"
                 Margin="20 15 0 0"
                 >
-                <Hyperlink Command="{Binding toExchangePage}">
+                <Hyperlink 
+                    Command="{Binding toExchangePage}" 
+                    Foreground="#1E90FF" 
+                    FontWeight="Normal"
+                    TextDecorations="Underline"
+                    Style="{DynamicResource hyperlink}">
                     <Run Text="{Binding CurrentExchange.ExchangeUrl}"/>
                 </Hyperlink>
             </TextBlock>
