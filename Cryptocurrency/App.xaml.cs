@@ -54,6 +54,7 @@ namespace Cryptocurrency
         private void OnStartup(object sender, StartupEventArgs e)
         {
             ServiceProvider!.GetRequiredService<ThemeProviderService>().ChangeTheme(Theme.Light, Resources);
+            ServiceProvider!.GetRequiredService<ThemeProviderService>().ChangeLocalization(Model.Enums.Localization.ENG, Resources);
             ViewModelLocator.Init(ServiceProvider);
             var mainWindow = ServiceProvider!.GetRequiredService<MainWindow>();
             mainWindow.Show();

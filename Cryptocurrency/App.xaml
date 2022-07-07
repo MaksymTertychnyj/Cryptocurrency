@@ -10,6 +10,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/LightTheme.xaml"/>
                 <ResourceDictionary Source="Style/DarkTheme.xaml"/>
+                <ResourceDictionary Source="Localization/Eng.xaml"/>
+                <ResourceDictionary Source="Localization/Ukr.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
