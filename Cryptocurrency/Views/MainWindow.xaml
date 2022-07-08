@@ -23,7 +23,8 @@
                     Command="{Binding ClickHome}"
                     Style="{DynamicResource hyperlink}"
                     >
-                    Home
+                    <TextBlock 
+                        Text="{DynamicResource toHome}"/>
                 </Hyperlink>
             </TextBlock>
             <TextBlock
@@ -36,7 +37,8 @@
                     Command="{Binding ChangeTheme}"
                     Style="{DynamicResource hyperlink}"
                     >
-                    Theme
+                     <TextBlock 
+                        Text="{DynamicResource theme}"/>
                 </Hyperlink>
             </TextBlock>
             <ComboBox

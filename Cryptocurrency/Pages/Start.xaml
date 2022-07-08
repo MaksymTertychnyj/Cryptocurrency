@@ -23,9 +23,8 @@
                 Margin="10 0 0 0"
                 FontWeight="Bold"
                 Style="{DynamicResource textblock}"
-                >
-                Search
-            </TextBlock>
+                Text="{DynamicResource search}"
+                />
             <TextBox
                 Height="20"
                 Width="100"
@@ -54,7 +53,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Name"></TextBlock>
+                                <TextBlock Text="{DynamicResource name}"></TextBlock>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn>
@@ -64,7 +63,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Symbol"></TextBlock>
+                                <TextBlock Text="{DynamicResource symbol}"></TextBlock>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn>
@@ -74,7 +73,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Price, $"></TextBlock>
+                                <TextBlock Text="{DynamicResource priceu}"></TextBlock>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn>
@@ -94,7 +93,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Market Cap, $"></TextBlock>
+                                <TextBlock Text="{DynamicResource marketcap}"></TextBlock>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn>
@@ -104,7 +103,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Volume(24h), $"></TextBlock>
+                                <TextBlock Text="{DynamicResource volume24u}"></TextBlock>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn>
@@ -114,7 +113,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Circulating Supply, $"></TextBlock>
+                                <TextBlock Text="{DynamicResource circulatingsupply}"></TextBlock>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                     </GridView.Columns>
