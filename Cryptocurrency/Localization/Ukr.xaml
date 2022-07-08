@@ -1,4 +1,27 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="toHome">На головну</system:String>
+    <system:String x:Key="theme">Тема</system:String>
+    <system:String x:Key="search">Пошук</system:String>
+    <system:String x:Key="name">Назва</system:String>
+    <system:String x:Key="symbol">Символ</system:String>
+    <system:String x:Key="priceu">Ціна, $</system:String>
+    <system:String x:Key="marketcap">Ринкова капіталізація, $</system:String>
+    <system:String x:Key="volume24u">Обсяг(24h), $</system:String>
+    <system:String x:Key="circulatingsupply">Циркуляційний запас, $</system:String>
+
+    <system:String x:Key="homepage">Домашня сторінка</system:String>
+    <system:String x:Key="converter">Конвертор</system:String>
+    <system:String x:Key="to">в</system:String>
+    <system:String x:Key="exchange">Біржа</system:String>
+    <system:String x:Key="quote">Встановлена ціна</system:String>
+    <system:String x:Key="price">Ціна</system:String>
+    <system:String x:Key="volume24">Обсяг, (24Hr)</system:String>
+    <system:String x:Key="trades">Торгівлі, (24Hr)</system:String>
+    <system:String x:Key="volumeusd">Обсяг, USD:</system:String>
+    <system:String x:Key="totalvolume">Загальний обсяг, %</system:String>
+    <system:String x:Key="tradingpairs">Торгові пари</system:String>
+
 </ResourceDictionary>
