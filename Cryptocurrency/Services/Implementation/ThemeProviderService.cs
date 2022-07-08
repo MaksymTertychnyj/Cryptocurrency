@@ -13,6 +13,7 @@ namespace Cryptocurrency.Services.Implementation
     {
         public ResourceDictionary _resources { get; set; } = new ResourceDictionary();
         public Theme CurrentTheme { get; set; }
+        public Model.Enums.Localization CurrentLocalization { get; set; }
 
         public void ChangeTheme(Theme theme, ResourceDictionary resources)
         {
@@ -27,6 +28,22 @@ namespace Cryptocurrency.Services.Implementation
             {
                 if (CurrentTheme == Theme.Dark)
                     ApplyResources("Style/DarkTheme.xaml");
+            }
+        }
+
+        public void ChangeLocalization(Model.Enums.Localization localization, ResourceDictionary resources)
+        {
+            _resources = resources;
+            CurrentLocalization = localization;
+            resources.MergedDictionaries.Clear();
+            if (CurrentLocalization == Model.Enums.Localization.ENG)
+            {
+                ApplyResources("Localization/Eng.xaml");
+            }
+            else
+            {
+                if (CurrentLocalization == Model.Enums.Localization.UKR)
+                    ApplyResources("Localization/Ukr.xaml");
             }
         }
 

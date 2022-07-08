@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="toHome">Home</system:String>
+    <system:String x:Key="theme">Theme</system:String>
+    <system:String x:Key="search">Search</system:String>
+    <system:String x:Key="name">Name</system:String>
+    <system:String x:Key="symbol">Symbol</system:String>
+    <system:String x:Key="priceu">Price, $</system:String>
+    <system:String x:Key="marketcap">Market Cap, $</system:String>
+    <system:String x:Key="volume24u">Volume(24h), $</system:String>
+    <system:String x:Key="circulatingsupply">Circulating Supply, $</system:String>
+    
+    <system:String x:Key="homepage">Home page</system:String>
+    <system:String x:Key="converter">Converter</system:String>
+    <system:String x:Key="to">to</system:String>
+    <system:String x:Key="exchange">Exchange</system:String>
+    <system:String x:Key="quote">Quote</system:String>
+    <system:String x:Key="price">Price</system:String>
+    <system:String x:Key="volume24">Volume, (24Hr)</system:String>
+    <system:String x:Key="trades">Trades, (24Hr)</system:String>
+    <system:String x:Key="volumeusd">Volume, USD:</system:String>
+    <system:String x:Key="totalvolume">Total volume, %</system:String>
+    <system:String x:Key="tradingpairs">Trading pairs</system:String>
+</ResourceDictionary>

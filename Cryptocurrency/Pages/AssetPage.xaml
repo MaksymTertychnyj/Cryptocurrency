@@ -68,7 +68,7 @@
                     FontWeight="Normal"
                     TextDecorations="Underline"
                     Style="{DynamicResource hyperlink}">
-                    Home page
+                    <TextBlock Text="{DynamicResource homepage}"/>
                 </Hyperlink>
             </TextBlock>
             <TextBlock
@@ -95,7 +95,7 @@
                 Margin="20 0 0 0"
                 Style="{DynamicResource textblock}"
                 >
-                <Run Text="Converter"/>
+                <Run Text="{DynamicResource converter}"/>
             </TextBlock>
             <ComboBox
                 Width="80"
@@ -147,7 +147,7 @@
                 >
                 <TextBlock
                     Style="{DynamicResource textblock}">
-                    <Run Text="to"/>
+                    <Run Text="{DynamicResource to}"/>
                     <Run Text="{Binding CurrentAsset.Symbol}"/>
                 </TextBlock>
             </Button>
@@ -162,7 +162,7 @@
                 <TextBlock
                     Style="{DynamicResource textblock}"
                     >
-                    <Run Text="to"/>
+                    <Run Text="{DynamicResource to}"/>
                     <Run Text="{Binding SelectedRate.Symbol}"/>
                 </TextBlock>
             </Button>
@@ -197,7 +197,7 @@
                                 </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                                 <GridViewColumn.Header>
-                                <TextBlock Text="Exchange"/>
+                                <TextBlock Text="{DynamicResource exchange}"/>
                             </GridViewColumn.Header>
                             </GridViewColumn>
                         <GridViewColumn>
@@ -212,7 +212,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Quote"/>
+                                <TextBlock Text="{DynamicResource quote}"/>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="100">
@@ -222,7 +222,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Price"/>
+                                <TextBlock Text="{DynamicResource price}"/>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="100">
@@ -232,7 +232,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Volume, (24Hr)"/>
+                                <TextBlock Text="{DynamicResource volume24}"/>
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="100">
@@ -242,7 +242,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                             <GridViewColumn.Header>
-                                <TextBlock Text="Trades, (24Hr)"/>
+                                <TextBlock Text="{DynamicResource trades}"/>
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
@@ -268,7 +268,7 @@
                 VerticalAlignment="Stretch"
                 FontSize="10" 
                 Margin="20 20 0 0"
-                Text="Volume, USD:"
+                Text="{DynamicResource volumeusd}"
                 Style="{DynamicResource textblock}"
                 />
             <TextBlock
@@ -284,7 +284,7 @@
                 VerticalAlignment="Stretch"
                 FontSize="10" 
                 Margin="20 20 0 0"
-                Text="Total volume, %:"
+                Text="{DynamicResource totalvolume}"
                 Style="{DynamicResource textblock}"
                 />
             <TextBlock
@@ -299,7 +299,7 @@
                 VerticalAlignment="Stretch"
                 FontSize="10" 
                 Margin="20 20 0 0"
-                Text="Trading pairs:"
+                Text="{DynamicResource tradingpairs}"
                 Style="{DynamicResource textblock}"
                 />
             <TextBlock

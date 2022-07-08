@@ -7,7 +7,6 @@
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
         >
-        
     <Grid Style="{DynamicResource grid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -24,7 +23,8 @@
                     Command="{Binding ClickHome}"
                     Style="{DynamicResource hyperlink}"
                     >
-                    Home
+                    <TextBlock 
+                        Text="{DynamicResource toHome}"/>
                 </Hyperlink>
             </TextBlock>
             <TextBlock
@@ -37,9 +37,31 @@
                     Command="{Binding ChangeTheme}"
                     Style="{DynamicResource hyperlink}"
                     >
-                    Theme
+                     <TextBlock 
+                        Text="{DynamicResource theme}"/>
                 </Hyperlink>
             </TextBlock>
+            <ComboBox
+                Width="60"
+                Height="20"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="30 0 0 0"
+                VerticalContentAlignment="Center"
+                ItemsSource="{Binding ListOfLocalization}"
+                SelectedItem="{Binding SelectedLocalization, UpdateSourceTrigger= PropertyChanged}"
+                SelectedIndex="0"
+                Style="{DynamicResource combobox}"
+                ItemContainerStyle="{DynamicResource comboboxitem}"
+                >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock 
+                            VerticalAlignment="Center"
+                            Text="{Binding BindsDirectlyToSource=True}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </DockPanel>
         <Frame
             Grid.Row="1"
